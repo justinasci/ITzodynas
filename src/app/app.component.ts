@@ -17,7 +17,8 @@ export class AppComponent {
   title = 'app';
   lt = '';
   en = '';
-  dictionary = [];
+  dictionary: any;
+  display = [];
 
   getDictionary() : Observable<any>  {
     return this.http.get('./assets/dictionary.json');
@@ -25,17 +26,59 @@ export class AppComponent {
 
   loadDictionary() {
     return this.getDictionary().subscribe((data: any) => {
+
+      data.eng = data.eng.map( (word, id ) => {
+        return {'word': word, id: id};
+      });
+      let d = [];
+
+      data.lt.forEach((element, id) => {
+        for(let i = 0; i < element.length; i++) {
+          const t = {'id': id, 'word': element[i]};
+          d.push(t);
+        }
+      });
+
+      data.lt = d;
       this.dictionary = data;
-      console.log(this.dictionary);
     })
   }
 
   onKeyEn(event: any) {
-    console.log(event.target.value);
+
+    if(event.target.value.length < 3) {
+      this.display = [];
+      return;
+    }
+
+    this.display = this.dictionary.eng.filter( (entry, id ) => {
+      if(entry.word.includes(event.target.value))
+      {
+        return entry;
+      }
+    });
+    this.display = this.display.map(entry => {
+      entry.en = entry.word;
+      entry.lt = this.dictionary.lt.filter(lt => {
+        if(lt.id === entry.id) {
+          return lt;
+        }
+      });
+      entry.lt = entry.lt.map(lt => {
+        return lt.word;
+      })
+
+      return entry;
+    });
+
+
+
+    console.log(this.display);
   }
 
   onKeyLt(event: any) {
     console.log(event.target.value);
+  
   }
   
 }
