@@ -1,15 +1,29 @@
-<div class="container h-100">
+<section class="jumbotron text-center bg-white">
+
+<div id="collapseExample" [ngbCollapse]="frontPageIsCollapsed">
+  <div class="container">
+    <h1 class="jumbotron-heading">Anglų–lietuvių kalbų kompiuterijos žodynas</h1>
+    <p class="lead text-muted">Vilniaus universiteto Matematikos ir informatikos institutas</p>
+    <p class="lead text-muted">Valentina Dagienė, Gintautas Grigas, Tatjana Jevsikova</p>
+    <p class="lead text-muted">III leidimas</p>
+  </div>
+</div>
+</section>
+
+
+
+<div class="container h-30 border border-secondary rounded">
     <div class="row h-50 justify-content-center align-items-end">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="exampleInputEmail1">Anglų</label>
-                <input type="text" (keyup)="onKeyEn($event)" class="form-control" id="lietuviu" [(ngModel)]="lt" placeholder="Angliškas terminas">
+                <input type="text" (keyup)="onKeyEn($event)" class="form-control" id="lietuviu" [(ngModel)]="en" placeholder="Angliškas terminas">
               </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label for="exampleInputEmail1">Lietuvių</label>
-                <input type="text" (keyup)="onKeyLt($event)" class="form-control" id="anglu" [(ngModel)]="en" placeholder="Lietuviškas terminas">
+                <input type="text" (keyup)="onKeyLt($event)" class="form-control" id="anglu" [(ngModel)]="lt" placeholder="Lietuviškas terminas">
               </div>
         </div>
     </div>

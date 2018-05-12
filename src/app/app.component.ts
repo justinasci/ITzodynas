@@ -19,6 +19,7 @@ export class AppComponent {
   en = '';
   dictionary: any;
   display = [];
+  frontPageIsCollapsed=false;
 
   getDictionary() : Observable<any>  {
     return this.http.get('./assets/dictionary.json');
@@ -45,6 +46,9 @@ export class AppComponent {
   }
 
   onKeyEn(event: any) {
+
+
+    this.frontPageIsCollapsed=true;
 
     if(event.target.value.length < 3) {
       this.display = [];
